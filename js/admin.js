@@ -2,8 +2,10 @@ function campoRequerido(){
     console.log('Desde la funcion campo requerido')
     if(campoCodigo.value.length > 0){
         console.log('aqui esta todo bien');
+        campoCodigo.className='form-control is-valid'
     }else{
         console.log('aqui muestro un error');
+        campoCodigo.className='form-control is-invalid'
     }
 }
 
