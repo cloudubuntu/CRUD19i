@@ -4,9 +4,11 @@ function campoRequerido(input) {
     //la funcion trim elimina un espacio vacio solanente al inicio
     //console.log('aqui esta todo bien');
     input.className = "form-control is-valid";
+    return true;
   } else {
     //console.log('aqui muestro un error');
     input.className = "form-control is-invalid";
+    return false;
   }
 }
 
@@ -18,9 +20,11 @@ function validarNumeros(input) {
   if (regExp.test(input.value)) {
     //cumple con la expresion regular
     input.className = "form-control is-valid";
+    return true;
   } else {
     //no cumple con la expresion regular
     input.className = "form-control is-invalid";
+    return false;
   }
 }
 
@@ -28,8 +32,10 @@ function validarURL(input){
     let regExpEmail=/^https?:\/\/[\w\-]+(\.[\w\-]+)+[/#?]?.*$/;
     if(regExpEmail.test(input.value)){
         input.className = "form-control is-valid";
+        return true;
     }else{
         input.className = "form-control is-invalid";
+        return false;
     }
 }
 //validacion general en el form
@@ -37,7 +43,14 @@ function validarURL(input){
 function validarGeneral(e){
     //prevenir el actualizar del submit, da tiempo a ejecutar mi codigo antes de borrar todo el formulario.
     e.preventDefault();
-    console.log('desde la fucion validar general');   
+    console.log('desde la fucion validar general');
+    if(campoRequerido(campoCodigo)&&campoRequerido(inputProducto)&&campoRequerido(inputDescripcion)&&validarNumeros(inputCantidad)&&validarURL(inputURL)){
+        console.log('todo esta ok');
+        
+    }else{
+        console.log('los datos estan mal');
+    }
+
 }
 
 //traigo el elemento que necesito del html
