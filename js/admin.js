@@ -1,16 +1,74 @@
-function campoRequerido(){
-    console.log('Desde la funcion campo requerido')
-    if(campoCodigo.value.length > 0){
-        console.log('aqui esta todo bien');
-        campoCodigo.className='form-control is-valid'
+function campoRequerido(input) {
+  //console.log('Desde la funcion campo requerido')
+  if (input.value.trim().length > 0) {
+    //la funcion trim elimina un espacio vacio solanente al inicio
+    //console.log('aqui esta todo bien');
+    input.className = "form-control is-valid";
+  } else {
+    //console.log('aqui muestro un error');
+    input.className = "form-control is-invalid";
+  }
+}
+
+//expresiones regulares
+function validarNumeros(input) {
+  //primero se crea una expresion regular
+  let regExp = /^[0-9]{1,3}$/; //de 0 a 9 y minimo 1 digito y como maximo 3
+  //usar el metodo test() de javascript para usar las expresiones regulares y retorna true o false
+  if (regExp.test(input.value)) {
+    //cumple con la expresion regular
+    input.className = "form-control is-valid";
+  } else {
+    //no cumple con la expresion regular
+    input.className = "form-control is-invalid";
+  }
+}
+
+function validarURL(input){
+    let regExpEmail=/^https?:\/\/[\w\-]+(\.[\w\-]+)+[/#?]?.*$/;
+    if(regExpEmail.test(input.value)){
+        input.className = "form-control is-valid";
     }else{
-        console.log('aqui muestro un error');
-        campoCodigo.className='form-control is-invalid'
+        input.className = "form-control is-invalid";
     }
+}
+//validacion general en el form
+
+function validarGeneral(e){
+    //prevenir el actualizar del submit, da tiempo a ejecutar mi codigo antes de borrar todo el formulario.
+    e.preventDefault();
+    console.log('desde la fucion validar general');   
 }
 
 //traigo el elemento que necesito del html
-let campoCodigo = document.querySelector('#codigo');
-
+let campoCodigo = document.querySelector("#codigo");
+let inputProducto = document.querySelector("#producto");
+let inputDescripcion = document.querySelector("#descripcion");
+let inputCantidad = document.querySelector("#cantidad");
+let inputURL = document.querySelector("#url");
 //asociar un evento a un elemento del html
-campoCodigo.addEventListener('blur', campoRequerido);
+campoCodigo.addEventListener("blur", () => {
+  campoRequerido(campoCodigo);
+});
+
+inputProducto.addEventListener("blur", () => {
+  campoRequerido(inputProducto);
+});
+
+inputDescripcion.addEventListener("blur", () => {
+  campoRequerido(inputDescripcion);
+});
+
+inputCantidad.addEventListener("blur", () => {
+  validarNumeros(inputCantidad);
+});
+
+inputURL.addEventListener("blur", () => {
+  validarURL(inputURL);
+});
+
+let form=document.getElementById('idForm');
+
+console.log(form);
+
+form.addEventListener('submit', validarGeneral);

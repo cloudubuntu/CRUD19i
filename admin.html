@@ -43,7 +43,7 @@
       <section class="my-5">
         <h1 class="display-3 text-center">Administrar productos</h1>
         <hr />
-        <form>
+        <form id="idForm">
           <div class="mb-3">
             <label for="codigo" class="form-label ">Codigo</label>
             <input
@@ -52,6 +52,8 @@
               id="codigo"
               placeholder="123"
             />
+            <!-- div agregado para agregar el invalid-feedback -->
+            <div class="invalid-feedback">Ingrese un codigo alfanumerico</div>
           </div>
           <div class="mb-3">
             <label for="producto" class="form-label">Producto</label>
