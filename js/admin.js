@@ -35,4 +35,22 @@ let form=document.getElementById('idForm');
 
 console.log(form);
 
-form.addEventListener('submit', validarGeneral);
+form.addEventListener('submit', guardaProducto);
+
+
+function guardaProducto(e){
+  e.preventDefault();
+  //verificar validaciones
+  if(validarGeneral(campoCodigo, inputProducto, inputDescripcion, inputCantidad, inputURL)){
+    //crear un producto
+    crearProducto();
+  }
+  
+
+}
+
+function crearProducto(){
+  //crear un producto
+
+  console.log('aqui tengo que crear un producto');
+}

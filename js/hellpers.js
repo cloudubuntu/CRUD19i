@@ -1,7 +1,8 @@
 //tambien llamado validaciones
 //-----------------------------
 //validaciones traidas de admin.js
-import { campoCodigo } from "./admin.js";
+
+
 export function campoRequerido(input) {
     //console.log('Desde la funcion campo requerido')
     if (input.value.trim().length > 0) {
@@ -46,19 +47,21 @@ export function campoRequerido(input) {
   }
   //validacion general en el form
   
- export function validarGeneral(e){
+ export function validarGeneral(campoCodigo, inputProducto, inputDescripcion, inputCantidad, inputURL){
       //prevenir el actualizar del submit, da tiempo a ejecutar mi codigo antes de borrar todo el formulario.
-      e.preventDefault();
-      console.log('desde la fucion validar general');
+      //e.preventDefault(); solo funciona con el evento submit q esta en admin.js en guardarProducto()
+      //console.log('desde la fucion validar general');
       let msja=document.getElementById('msj');
       if(campoRequerido(campoCodigo)&&campoRequerido(inputProducto)&&campoRequerido(inputDescripcion)&&validarNumeros(inputCantidad)&&validarURL(inputURL)){
           console.log('todo esta ok');
-          msja.className="alert alert-danger my-5 d-none";  
+          msja.className="alert alert-danger my-5 d-none"; 
+          return true; 
       }else{
           console.log('los datos estan mal');
          
   
-          msja.className="alert alert-secondary my-5";
+          msja.className="alert alert-danger my-5";
+          return false;
       }
   
   }
