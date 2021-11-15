@@ -44,11 +44,15 @@ function validarGeneral(e){
     //prevenir el actualizar del submit, da tiempo a ejecutar mi codigo antes de borrar todo el formulario.
     e.preventDefault();
     console.log('desde la fucion validar general');
+    let msja=document.getElementById('msj');
     if(campoRequerido(campoCodigo)&&campoRequerido(inputProducto)&&campoRequerido(inputDescripcion)&&validarNumeros(inputCantidad)&&validarURL(inputURL)){
         console.log('todo esta ok');
-        
+        msja.className="alert alert-danger my-5 d-none";  
     }else{
         console.log('los datos estan mal');
+       
+
+        msja.className="alert alert-secondary my-5";
     }
 
 }
@@ -81,6 +85,7 @@ inputURL.addEventListener("blur", () => {
 });
 
 let form=document.getElementById('idForm');
+
 
 console.log(form);
 
