@@ -26,8 +26,7 @@ function codeRepeat(code) {
 }
 
 function btn(){
-    let code=aleatorio();
-    console.log(code);
+    console.log(aleatorio());
     console.log(regCod);
     console.log('-------------------');
 }
