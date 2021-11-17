@@ -12,8 +12,9 @@ let inputCantidad = document.querySelector("#cantidad");
 let inputURL = document.querySelector("#url");
 
 //lista para guardar los objetos
+//si hay algo en localStorage, lo guardo en el arreglo, sino es un arreglo vacio
 
-let listaProductos=[];
+let listaProductos=JSON.parse(localStorage.getItem('arregloProductosKey')) || [];
 
 //asociar un evento a un elemento del html
 campoCodigo.addEventListener("blur", () => {
@@ -77,8 +78,13 @@ function limpiarFormulario(){
   inputDescripcion.className='form-control';
   inputCantidad.className='form-control';
   inputURL.className='form-control';
+  //guardar el arreglo de productos dentro del local storage
+  guardarlocalStorage();
 }
 
+function guardarlocalStorage(){
+  localStorage.setItem('arregloProductosKey',JSON.stringify(listaProductos));
+}
 // let prod1=new Producto(aleatorio(), 'macbookPro', 'MacbookPro A1278', 2, 'https://www.example.com');
 
 // console.log('codigo del producto generado '+prod1.getCodigo);
