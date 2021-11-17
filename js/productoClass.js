@@ -1,4 +1,4 @@
-class Producto{
+export class Producto{
 
     constructor(codigo, producto, descripcion,cantidad, url ){
         this.codigo=codigo;

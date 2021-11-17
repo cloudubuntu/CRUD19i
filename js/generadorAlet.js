@@ -1,9 +1,9 @@
 let regCod = [];
 let repeat;
 
-function aleatorio() {
+ export function aleatorio() {
   do {
-    let code = parseInt(Math.random() * 10);
+    let code = parseInt(Math.random() * 999999);
 
     repeat = codeRepeat(code);
     if (!repeat) {
@@ -11,6 +11,7 @@ function aleatorio() {
       return code;
     } else {
       repeat = false;
+      
     }
   } while (!repeat);
 }
@@ -25,8 +26,8 @@ function codeRepeat(code) {
   return repeat;
 }
 
-function btn(){
-    console.log(aleatorio());
-    console.log(regCod);
-    console.log('-------------------');
-}
+// function btn(){
+//     console.log(aleatorio());
+//     console.log(regCod);
+//     console.log('-------------------');
+// }
