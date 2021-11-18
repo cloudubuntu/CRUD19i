@@ -1,4 +1,4 @@
-let regCod = [];
+let regCod = JSON.parse(localStorage.getItem('codeArrayKey')) || [];
 let repeat;
 
  export function aleatorio() {
@@ -14,6 +14,7 @@ let repeat;
       
     }
   } while (!repeat);
+
 }
 
 function codeRepeat(code) {
@@ -31,3 +32,7 @@ function codeRepeat(code) {
 //     console.log(regCod);
 //     console.log('-------------------');
 // }
+
+ export function codeArrayLocalStorage(){
+  localStorage.setItem('codeArrayKey',JSON.stringify(regCod));
+}

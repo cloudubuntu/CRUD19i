@@ -4,6 +4,8 @@ import{Producto} from "./productoClass.js";
 
 import { aleatorio } from "./generadorAlet.js";
 
+import{codeArrayLocalStorage} from "./generadorAlet.js"
+
 //traigo el elemento que necesito del html
 let campoCodigo = document.querySelector("#codigo");
 let inputProducto = document.querySelector("#producto");
@@ -80,6 +82,7 @@ function limpiarFormulario(){
   inputURL.className='form-control';
   //guardar el arreglo de productos dentro del local storage
   guardarlocalStorage();
+  codeArrayLocalStorage();
 }
 
 function guardarlocalStorage(){
