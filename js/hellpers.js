@@ -47,12 +47,12 @@ export function campoRequerido(input) {
   }
   //validacion general en el form
   
- export function validarGeneral(campoCodigo, inputProducto, inputDescripcion, inputCantidad, inputURL){
+ export function validarGeneral(inputProducto, inputDescripcion, inputCantidad, inputURL){
       //prevenir el actualizar del submit, da tiempo a ejecutar mi codigo antes de borrar todo el formulario.
       //e.preventDefault(); solo funciona con el evento submit q esta en admin.js en guardarProducto()
       //console.log('desde la fucion validar general');
       let msja=document.getElementById('msj');
-      if(campoRequerido(campoCodigo)&&campoRequerido(inputProducto)&&campoRequerido(inputDescripcion)&&validarNumeros(inputCantidad)&&validarURL(inputURL)){
+      if(campoRequerido(inputProducto)&&campoRequerido(inputDescripcion)&&validarNumeros(inputCantidad)&&validarURL(inputURL)){
           console.log('todo esta ok');
           msja.className="alert alert-danger my-5 d-none"; 
           return true; 

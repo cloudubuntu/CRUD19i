@@ -5,7 +5,7 @@ import{Producto} from "./productoClass.js";
 import { aleatorio } from "./generadorAlet.js";
 
 //traigo el elemento que necesito del html
- export let campoCodigo = document.querySelector("#codigo");
+let campoCodigo = document.querySelector("#codigo");
 let inputProducto = document.querySelector("#producto");
 let inputDescripcion = document.querySelector("#descripcion");
 let inputCantidad = document.querySelector("#cantidad");
@@ -17,9 +17,9 @@ let inputURL = document.querySelector("#url");
 let listaProductos=JSON.parse(localStorage.getItem('arregloProductosKey')) || [];
 
 //asociar un evento a un elemento del html
-campoCodigo.addEventListener("blur", () => {
+/*campoCodigo.addEventListener("blur", () => {
   campoRequerido(campoCodigo);
-});
+});*/
 
 inputProducto.addEventListener("blur", () => {
   campoRequerido(inputProducto);
@@ -48,7 +48,7 @@ form.addEventListener('submit', guardaProducto);
 function guardaProducto(e){
   e.preventDefault();
   //verificar validaciones
-  if(validarGeneral(campoCodigo, inputProducto, inputDescripcion, inputCantidad, inputURL)){
+  if(validarGeneral(inputProducto, inputDescripcion, inputCantidad, inputURL)){
     //crear un producto
     crearProducto();
   }
@@ -59,7 +59,7 @@ function guardaProducto(e){
 function crearProducto(){
   //crear un  objeto producto
   //console.log('aqui tengo que crear un producto');
-  let productoNuevo=new Producto(campoCodigo.value, inputProducto.value, inputDescripcion.value, inputCantidad.value, inputURL.value );
+  let productoNuevo=new Producto(aleatorio(), inputProducto.value, inputDescripcion.value, inputCantidad.value, inputURL.value );
 
   //console.log(productoNuevo);
   //guardar el objeto dentro del array de producto
@@ -73,7 +73,7 @@ function crearProducto(){
 
 function limpiarFormulario(){
   form.reset(); //el metodo reset limpia los value de los input
-  campoCodigo.className='form-control';
+  //campoCodigo.className='form-control';
   inputProducto.className='form-control';
   inputDescripcion.className='form-control';
   inputCantidad.className='form-control';
