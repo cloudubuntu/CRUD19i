@@ -112,7 +112,7 @@ function crearFila(productoNuevo){
   <td>${productoNuevo.descripcion}</td>
   <td>${productoNuevo.cantidad}</td>
   <td>${productoNuevo.url}</td>
-  <td class="text-center"><button class="btn btn-warning" type="submit">Editar</button>
+  <td class="text-center"><button class="btn btn-warning" type="submit" onclick='prepararEdicionProducto()'>Editar</button>
     <button class="btn btn-danger" type="submit">Borrar</button></td>
 </tr>`
 }
@@ -126,4 +126,8 @@ function cargaInicial(){
   }else{
     
   }
+}
+//forma de crear una funcion global para poder tomarla desde el html
+window.prepararEdicionProducto= function(){
+  console.log('desde editar');
 }
