@@ -16,6 +16,7 @@ let inputURL = document.querySelector("#url");
 
 let listaProductos=JSON.parse(localStorage.getItem('arregloProductosKey')) || [];
 
+
 //asociar un evento a un elemento del html
 campoCodigo.addEventListener("blur", () => {
   campoRequerido(campoCodigo);
@@ -38,7 +39,9 @@ inputURL.addEventListener("blur", () => {
 });
 
 let form=document.getElementById('idForm');
+//llamo a carga inicial
 
+cargaInicial();
 
 console.log(form);
 
@@ -67,7 +70,17 @@ function crearProducto(){
   console.log(listaProductos);
   //limpiar el formulario
   limpiarFormulario();
-  
+  //muestro un cartel de confirmacion de guardado
+  Swal.fire(
+    'Producto creado',
+    'Su producto fue correctamente cargado',
+    'success'
+  )
+
+  //cargar el producto en una nueva fila
+
+  crearFila(productoNuevo);
+
 }
 
 
@@ -88,3 +101,29 @@ function guardarlocalStorage(){
 // let prod1=new Producto(aleatorio(), 'macbookPro', 'MacbookPro A1278', 2, 'https://www.example.com');
 
 // console.log('codigo del producto generado '+prod1.getCodigo);
+
+
+function crearFila(productoNuevo){
+  
+  let tablaProductos=document.getElementById('tablaProductos');
+  tablaProductos.innerHTML+=`<tr>
+  <th scope="row">${productoNuevo.codigo}</th>
+  <td>${productoNuevo.producto}</td>
+  <td>${productoNuevo.descripcion}</td>
+  <td>${productoNuevo.cantidad}</td>
+  <td>${productoNuevo.url}</td>
+  <td class="text-center"><button class="btn btn-warning" type="submit">Editar</button>
+    <button class="btn btn-danger" type="submit">Borrar</button></td>
+</tr>`
+}
+
+
+function cargaInicial(){
+  if(listaProductos.length>0){
+  listaProductos.forEach((producto) => {
+        crearFila(producto);
+    });
+  }else{
+    
+  }
+}
