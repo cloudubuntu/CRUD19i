@@ -16,6 +16,7 @@ let inputURL = document.querySelector("#url");
 
 let listaProductos=JSON.parse(localStorage.getItem('arregloProductosKey')) || [];
 
+let productoExistente=false;//si es false se crea un prod nuevo, si es true se modifica.
 
 //asociar un evento a un elemento del html
 campoCodigo.addEventListener("blur", () => {
@@ -52,8 +53,16 @@ function guardaProducto(e){
   e.preventDefault();
   //verificar validaciones
   if(validarGeneral(campoCodigo, inputProducto, inputDescripcion, inputCantidad, inputURL)){
-    //crear un producto
-    crearProducto();
+      if(productoExistente){
+          //modificar un producto
+          modificarProducto();
+          productoExistente=false;
+      }else{
+          //crear un producto
+        crearProducto();
+      }
+    
+    
   }
   
 
@@ -112,7 +121,7 @@ function crearFila(productoNuevo){
   <td>${productoNuevo.descripcion}</td>
   <td>${productoNuevo.cantidad}</td>
   <td>${productoNuevo.url}</td>
-  <td class="text-center"><button class="btn btn-warning" type="submit" onclick='prepararEdicionProducto()'>Editar</button>
+  <td class="text-center"><button class="btn btn-warning" type="submit" onclick='prepararEdicionProducto("${productoNuevo.codigo}")'>Editar</button>
     <button class="btn btn-danger" type="submit">Borrar</button></td>
 </tr>`
 }
@@ -128,6 +137,38 @@ function cargaInicial(){
   }
 }
 //forma de crear una funcion global para poder tomarla desde el html
-window.prepararEdicionProducto= function(){
+window.prepararEdicionProducto= function(codigo){
   console.log('desde editar');
+  console.log(codigo); 
+  //buscar el producto en el arreglo
+  let productoBuscado= listaProductos.find( (producto)=>{return (producto.codigo===codigo)}); 
+
+    console.log(productoBuscado);
+    
+  //mostrar el producto en el formulario
+    campoCodigo.value=productoBuscado.codigo;
+    inputProducto.value=productoBuscado.producto;
+    inputDescripcion.value=productoBuscado.descripcion;
+    inputCantidad.value=productoBuscado.cantidad;
+    inputURL.value=productoBuscado.url;
+    //cambio el estado de productoExistente
+    productoExistente=true;
+}
+
+function modificarProducto(){
+    console.log('desde modificar producto');
+    //encontrar la posicion del elemento que quiero modificar
+    let indexObj=listaProductos.findIndex((producto)=>{
+        return (producto.codigo==campoCodigo.value);
+    });
+
+    console.log(indexObj);
+
+    //modificar los valores del objeto
+
+
+    //actualizar el localStorage
+
+
+    //actualizar la tabla
 }
