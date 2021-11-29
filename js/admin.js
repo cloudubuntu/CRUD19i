@@ -160,15 +160,25 @@ function modificarProducto(){
     //encontrar la posicion del elemento que quiero modificar
     let indexObj=listaProductos.findIndex((producto)=>{
         return (producto.codigo==campoCodigo.value);
-    });
+    });//si indexObj es igual a -1 es que no encontro el objeto
 
     console.log(indexObj);
 
     //modificar los valores del objeto
-
+    listaProductos[indexObj].producto=inputProducto.value;
+    listaProductos[indexObj].descripcion=inputDescripcion.value;
+    listaProductos[indexObj].cantidad=inputCantidad.value;
+    listaProductos[indexObj].url=inputURL.value,
 
     //actualizar el localStorage
-
-
+    guardarlocalStorage();
     //actualizar la tabla
+   borrarTabla();
+    cargaInicial();
+}
+
+
+function borrarTabla(){
+    let tablaProductos=document.querySelector('#tablaProductos');
+    tablaProductos.innerHTML='';
 }
