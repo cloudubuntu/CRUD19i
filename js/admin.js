@@ -129,8 +129,8 @@ function crearFila(productoNuevo){
   <td>${productoNuevo.descripcion}</td>
   <td>${productoNuevo.cantidad}</td>
   <td>${productoNuevo.url}</td>
-  <td class="text-center"><button class="btn btn-warning" type="submit" onclick='prepararEdicionProducto("${productoNuevo.codigo}")'>Editar</button>
-    <button class="btn btn-danger" type="submit">Borrar</button></td>
+  <td class="text-center"><button class="btn btn-warning" onclick='prepararEdicionProducto("${productoNuevo.codigo}")'>Editar</button>
+    <button class="btn btn-danger" onclick='borrarProducto("${productoNuevo.codigo}")' >Borrar</button></td>
 </tr>`
 }
 
@@ -199,4 +199,29 @@ function modificarProducto(){
 function borrarTabla(){
     let tablaProductos=document.querySelector('#tablaProductos');
     tablaProductos.innerHTML='';
+}
+
+
+window.borrarProducto=function(codigo){
+  console.log('desde borrar');
+  //buscar posicion del elemento dentro del arreglo y borrarlo
+  //filter retorna un nuevo arreglo con los objetos que coinciden con la condicion logica del filtro
+  let arregloNuevo=listaProductos.filter((producto)=>{
+    return (producto.codigo!=codigo)
+  })
+  console.log(arregloNuevo);
+  //atualizar el arreglo original y el localstorage
+  listaProductos=arregloNuevo;
+  guardarlocalStorage();
+  //actualizar la tabla
+
+  borrarTabla();
+  cargaInicial();
+  //mostrar info al usuario
+  Swal.fire(
+    'Producto eliminado',
+    'Su producto fue correctamente eliminado',
+    'success'
+  )
+
 }
