@@ -11,6 +11,8 @@ let inputDescripcion = document.querySelector("#descripcion");
 let inputCantidad = document.querySelector("#cantidad");
 let inputURL = document.querySelector("#url");
 
+let btnNuevo=document.querySelector("#btnNuevo");
+
 //lista para guardar los objetos
 //si hay algo en localStorage, lo guardo en el arreglo, sino es un arreglo vacio
 
@@ -18,10 +20,10 @@ let listaProductos=JSON.parse(localStorage.getItem('arregloProductosKey')) || []
 
 let productoExistente=false;//si es false se crea un prod nuevo, si es true se modifica.
 
-//asociar un evento a un elemento del html
+//asociar un evento a un elemento del html, el addevent recibe una funcion sin parametros, para incorporar los parametros, recibe una funcion anonima
 campoCodigo.addEventListener("blur", () => {
   campoRequerido(campoCodigo);
-});
+});//con fuoncion anonima tipo flecha
 
 inputProducto.addEventListener("blur", () => {
   campoRequerido(inputProducto);
@@ -38,8 +40,13 @@ inputCantidad.addEventListener("blur", () => {
 inputURL.addEventListener("blur", () => {
   validarURL(inputURL);
 });
+//con funcion sin parametros
+btnNuevo.addEventListener('click', limpiarFormulario);
 
 let form=document.getElementById('idForm');
+
+
+
 //llamo a carga inicial
 
 cargaInicial();
@@ -102,6 +109,7 @@ function limpiarFormulario(){
   inputURL.className='form-control';
   //guardar el arreglo de productos dentro del local storage
   guardarlocalStorage();
+  productoExistente=false;
 }
 
 function guardarlocalStorage(){
@@ -175,6 +183,16 @@ function modificarProducto(){
     //actualizar la tabla
    borrarTabla();
     cargaInicial();
+    //mostrar un cartel al usuario
+
+    Swal.fire(
+      'Producto modificado',
+      'Su producto fue correctamente cargado',
+      'success'
+    )
+
+    limpiarFormulario();
+
 }
 
 
